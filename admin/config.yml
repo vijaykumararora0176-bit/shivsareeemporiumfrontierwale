@@ -1,0 +1,63 @@
+backend:
+  name: git-gateway
+  branch: main
+
+publish_mode: simple
+media_folder: "site/assets/uploads"
+public_folder: "/assets/uploads"
+
+site_url: https://shivsareeemporiumfrontierwale.netlify.app
+locale: "en"
+
+collections:
+  - name: "blogs"
+    label: "Blogs"
+    label_singular: "Blog"
+    folder: "content/blogs"
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    slug: "{{slug}}"
+    preview_path: "blog/{{slug}}/"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "URL Slug", name: "slug", widget: "string", hint: "Use lowercase words separated by hyphens." }
+      - { label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", time_format: false }
+      - { label: "Category", name: "category", widget: "string", default: "General" }
+      - { label: "SEO Description", name: "description", widget: "text", hint: "Keep this concise and useful for search results." }
+      - { label: "Featured Image", name: "featured_image", widget: "image", required: false }
+      - { label: "Image Alt Text", name: "alt_text", widget: "string", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Published", name: "published", widget: "boolean", default: true }
+      - { label: "Article", name: "body", widget: "markdown" }
+
+  - name: "collections"
+    label: "Collections / Suits"
+    label_singular: "Suit"
+    folder: "content/collections"
+    create: true
+    extension: "json"
+    format: "json"
+    slug: "{{slug}}"
+    fields:
+      - { label: "Suit Title", name: "title", widget: "string" }
+      - { label: "Category", name: "category", widget: "select", options: ["Handwork Suits", "Party Wear Suits", "Bridal Suits", "Readymade Suits"], default: "Handwork Suits" }
+      - { label: "Suit Photo", name: "image", widget: "image" }
+      - { label: "SEO Alt Text", name: "alt", widget: "string", hint: "Describe exactly what is visible in the photo." }
+      - { label: "Short Description", name: "description", widget: "text", required: false }
+      - { label: "Published", name: "published", widget: "boolean", default: true }
+
+  - name: "site_settings"
+    label: "Site Settings / Video"
+    files:
+      - label: "About Us Video & Transcript"
+        name: "about_video"
+        file: "content/site.json"
+        fields:
+          - { label: "YouTube Video ID", name: "youtube_video_id", widget: "string" }
+          - { label: "Video Title", name: "video_title", widget: "string" }
+          - { label: "Video Upload Date", name: "video_upload_date", widget: "datetime", format: "YYYY-MM-DD", time_format: false }
+          - { label: "Video Intro", name: "video_intro", widget: "text" }
+          - { label: "Video Description", name: "video_description", widget: "text" }
+          - { label: "Supporting Text", name: "supporting_text", widget: "markdown" }
+          - { label: "Transcript", name: "transcript", widget: "markdown" }
